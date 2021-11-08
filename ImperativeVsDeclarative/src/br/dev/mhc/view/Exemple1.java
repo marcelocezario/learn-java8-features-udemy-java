@@ -2,7 +2,7 @@ package br.dev.mhc.view;
 
 import java.util.stream.IntStream;
 
-public class Main {
+public class Exemple1 {
 
 	public static void main(String[] args) {
 		
