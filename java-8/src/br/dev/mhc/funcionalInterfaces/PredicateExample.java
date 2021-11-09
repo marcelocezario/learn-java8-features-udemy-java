@@ -2,7 +2,7 @@ package br.dev.mhc.funcionalInterfaces;
 
 import java.util.function.Predicate;
 
-public class PredicateExemple {
+public class PredicateExample {
 
 	static Predicate<Integer> p = (i) -> {
 		return i % 2 == 0;
