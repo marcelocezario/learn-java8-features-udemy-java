@@ -21,7 +21,7 @@ public class StreamGroupingByExample {
 	public static void customizedGroupingBy() {
 		
 		Map<String, List<Student>> studentMap = StudentDataBase.getAllStudents()
-				.stream()
+				.stream() //Stream<Students>
 				.collect(Collectors.groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE"));
 		
 		System.out.println(studentMap);
