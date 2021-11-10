@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import br.dev.mhc.data.Student;
+import br.dev.mhc.data.StudentDataBase;
+
 public class StreamReduceExample {
 
 	public static int performMultiplication(List<Integer> integerList) {
@@ -30,6 +33,12 @@ public class StreamReduceExample {
 				// 7
 				.reduce((a, b) -> a * b);
 	}
+	
+	public static Optional<Student> getHighestGPAStudent() {
+		return StudentDataBase.getAllStudents().stream()
+				//students one by one
+				.reduce((s1,s2)->(s1.getGpa()>s2.getGpa()) ? s1 : s2);
+	}
 
 	public static void main(String[] args) {
 
@@ -45,11 +54,15 @@ public class StreamReduceExample {
 		System.out.println(result.get());
 
 		Optional<Integer> result1 = performMultiplicationWithoutIdentity(integers1);
-		
-		
 		System.out.println(result1.isPresent());
+
 		if(result1.isPresent()) {
 			System.out.println(result1.get());
+		}
+		
+		Optional<Student> studentOptional = getHighestGPAStudent();
+		if(getHighestGPAStudent().isPresent()) {
+			System.out.println(studentOptional.get());
 		}
 
 	}
