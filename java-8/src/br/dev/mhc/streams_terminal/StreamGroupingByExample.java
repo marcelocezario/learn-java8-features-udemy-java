@@ -1,8 +1,10 @@
 package br.dev.mhc.streams_terminal;
 
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -57,6 +59,39 @@ public class StreamGroupingByExample {
 		
 		System.out.println(studentLinkedHashamp);
 	}
+	
+	public static void calculateTopGpa() {
+		Map<Integer, Optional<Student>> studentMapOptional = StudentDataBase.getAllStudents()
+				.stream()
+				.collect(Collectors.groupingBy(Student::getGradeLevel, 
+						Collectors.maxBy(Comparator.comparing(Student::getGpa))));
+		
+		//System.out.println(studentMapOptional);
+		
+		Map<Integer, Student> studentMapOptional1 = StudentDataBase.getAllStudents()
+				.stream()
+				.collect(Collectors.groupingBy(Student::getGradeLevel, 
+						Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+		
+		System.out.println(studentMapOptional1);
+	}
+	
+	public static void calculateLeastGpa() {
+		Map<Integer, Optional<Student>> studentMapOptional = StudentDataBase.getAllStudents()
+				.stream()
+				.collect(Collectors.groupingBy(Student::getGradeLevel, 
+						Collectors.minBy(Comparator.comparing(Student::getGpa))));
+		
+		//System.out.println(studentMapOptional);
+		
+		Map<Integer, Student> studentMapOptional1 = StudentDataBase.getAllStudents()
+				.stream()
+				.collect(Collectors.groupingBy(Student::getGradeLevel, 
+						Collectors.collectingAndThen(Collectors.minBy(Comparator.comparing(Student::getGpa)), Optional::get)));
+		
+		System.out.println(studentMapOptional1);
+
+	}
 
 	public static void main(String[] args) {
 		
@@ -64,7 +99,9 @@ public class StreamGroupingByExample {
 		//customizedGroupingBy();
 		//twoLevelGrouping_1();
 		//twoLevelGrouping_2();
-		threeArgumentGroupBy();
+		//threeArgumentGroupBy();
+		//calculateTopGpa();
+		calculateLeastGpa();
 
 	}
 
