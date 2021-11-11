@@ -26,15 +26,33 @@ public class StreamGroupingByExample {
 		
 		System.out.println(studentMap);
 	}
+	
+	public static void twoLevelGrouping_1() {
+		
+		Map<Integer, Map<String, List<Student>>> studentMap = StudentDataBase.getAllStudents()
+				.stream() //Stream<Students>
+				.collect(Collectors.groupingBy(Student::getGradeLevel,
+						Collectors.groupingBy(student -> student.getGpa() >= 3.8 ? "OUTSTANDING" : "AVERAGE")));
+		
+		System.out.println(studentMap);
+	}
+	
+	public static void twoLevelGrouping_2() {
+		
+		Map<String, Integer> studentMap = StudentDataBase.getAllStudents()
+				.stream() //Stream<Students>
+				.collect(Collectors.groupingBy(Student::getName,
+						Collectors.summingInt(Student::getNoteBooks)));
+		
+		System.out.println(studentMap);
+	}
 
 	public static void main(String[] args) {
 		
-		groupStudentsByGender();
-		
-		System.out.println();
-		System.out.println();
-		
-		customizedGroupingBy();
+		//groupStudentsByGender();
+		//customizedGroupingBy();
+		//twoLevelGrouping_1();
+		twoLevelGrouping_2();
 
 	}
 
