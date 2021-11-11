@@ -2,7 +2,9 @@ package br.dev.mhc.dates;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoField;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.TemporalAdjusters;
+import java.time.temporal.TemporalUnit;
 
 public class LocalDateExample {
 
@@ -37,6 +39,28 @@ public class LocalDateExample {
 		System.out.println("withYear : " + localDate.withYear(2020));
 		System.out.println("with ChronoField : " + localDate.with(ChronoField.YEAR, 2020));
 		System.out.println("with TemporalAdjusters : " + localDate.with(TemporalAdjusters.firstDayOfNextMonth()));
+		
+		System.out.println("chronounit minus : " + localDate.minus(1, ChronoUnit.YEARS));
+		
+		/**
+		 * Unsupported
+		 */
+		
+		//System.out.println("chronounit minus : " + localDate.minus(1, ChronoUnit.MINUTES));
+		System.out.println("isSupported : " + localDate.isSupported(ChronoUnit.MINUTES));
+		
+		/**
+		 * Additional Support methods
+		 */
+		
+		System.out.println("leapYear : " + LocalDate.ofYearDay(2020, 01).isLeapYear());
+		
+		
+		//localDate = 11-november-2021
+		//localDate = 10-november-2021
+		System.out.println("isEqual : " + localDate.isEqual(localDate1));
+		System.out.println("isBefore : " + localDate.isBefore(localDate1));
+		System.out.println("isAfter : " + localDate.isAfter(localDate1));
 
 		
 		
