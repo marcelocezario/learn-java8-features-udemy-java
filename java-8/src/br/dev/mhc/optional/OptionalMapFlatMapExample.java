@@ -2,6 +2,7 @@ package br.dev.mhc.optional;
 
 import java.util.Optional;
 
+import br.dev.mhc.data.Bike;
 import br.dev.mhc.data.Student;
 import br.dev.mhc.data.StudentDataBase;
 
@@ -33,11 +34,22 @@ public class OptionalMapFlatMapExample {
 	}
 	
 	//flatmap
+	public static void optionalFlatMap() {
+		Optional<Student> studentOptional = Optional.ofNullable(StudentDataBase.studentSupplier.get()); // Optional<Student>
+		
+		Optional<String> name = studentOptional
+				.filter(student -> student.getGpa() >= 3.5) //Optional<Student <Optional<Bike>>>
+				.flatMap(Student::getBike) //Optional<Bike>
+				.map(Bike::getName);
+		
+		name.ifPresent(s -> System.out.println("name : " + name));
+	}
 
 	public static void main(String[] args) {
 
 		optionalFilter();
 		optionalMap();
+		optionalFlatMap();
 	}
 
 }
